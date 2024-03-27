@@ -1,11 +1,6 @@
 package br.com.fiap.produtomvc.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -35,14 +30,19 @@ public class Produto {
     private Double valor;
     // -- código omitido
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
+
     public Produto() {
     }
 
-    public Produto(Long id, String nome, String descricao, Double valor) {
+    public Produto(Long id, String nome, String descricao, Double valor, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -76,6 +76,10 @@ public class Produto {
     public void setValor(Double valor) {
         this.valor = valor;
     }
+
+    public Categoria getCategoria() { return categoria; }
+
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
     @Override
     public boolean equals(Object o) {
