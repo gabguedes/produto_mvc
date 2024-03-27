@@ -21,7 +21,7 @@ public class CategoriaController {
     @GetMapping("form")
     public String loadForm(Model model){
         model.addAttribute("categoria", new Categoria());
-        return "produto/nova-categoria";
+        return "categoria/nova-categoria";
     }
 
     @PostMapping()
@@ -30,7 +30,7 @@ public class CategoriaController {
                          BindingResult br,
                          RedirectAttributes attributes){
         if(br.hasErrors()){
-            return "produto/nova-categoria";
+            return "categoria/nova-categoria";
         }
         repository.save(categoria);
         attributes.addFlashAttribute("mensagem", "Categoria salva com sucesso!");
@@ -41,7 +41,7 @@ public class CategoriaController {
     @Transactional(readOnly = true)
     public String findAll(Model model){
         model.addAttribute("categorias", repository.findAll());
-        return "produto/listar-categoria";
+        return "categoria/listar-categoria";
     }
 
     @GetMapping("/{id}")
@@ -51,7 +51,7 @@ public class CategoriaController {
                 () -> new IllegalArgumentException("Categoria Inválida - id: " + id)
         );
         model.addAttribute("categoria", categoria);
-        return "produto/editar-categoria";
+        return "categoria/editar-categoria";
     }
 
     @PutMapping("/{id}")
@@ -61,7 +61,7 @@ public class CategoriaController {
                          BindingResult br){
         if(br.hasErrors()){
             categoria.setId(id);
-            return "/produto/editar-categoria";
+            return "/categoria/editar-categoria";
         }
         repository.save(categoria);
         return "redirect:/categorias";
@@ -71,12 +71,12 @@ public class CategoriaController {
     @Transactional
     public String delete (@PathVariable("id") Long id, Model model){
         if(!repository.existsById(id)){
-            throw new IllegalArgumentException("Categoria inválida - id: " + id);
+            throw new IllegalArgumentException("Recurso inválido - id: " + id);
         }
         try{
           repository.deleteById(id);
         }catch (Exception e){
-            throw new IllegalArgumentException("Categoria inválida - id: " + id);
+            throw new IllegalArgumentException("Falha na integridade referencial - id: " + id);
         }
 
         return "redirect:/categorias";

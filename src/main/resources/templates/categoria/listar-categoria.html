@@ -31,12 +31,6 @@
                         <td><span th:text="${categoria.nome}"> Nome </span></td>
                         
                         <td>
-                            <!--                            <a class="btn btn-danger btn-xs"-->
-                            <!--                            th:href="@{/categorias/deletar/{id}(id=${categoria.id})}"-->
-                            <!--                               th:data-confirm-delete="|Deseja excluir ${categoria.nome}?|"-->
-                            <!--                               onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">-->
-                            <!--                                Excluir</a>-->
-
                             <form th:action="@{/categorias/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
                                 <input type="hidden" name="_method" value="delete">
 
@@ -47,8 +41,6 @@
                         </td>
                         <td>
                             <form action="" th:action="@{/categorias/{id}(id=${categoria.id})}" th:object="${categoria}" method="get">
-                                <!--                                <a class="btn btn-primary btn-xs"-->
-                                <!--                                   th:href="@{/categorias/{id}(id=${categoria.id})}"> Editar</a>-->
                                 <input class="btn btn-primary btn-xs" type="submit" value="Editar">
                             </form>
 
@@ -57,11 +49,6 @@
                     </tr>
                     </tbody>
                 </table>
-
-                <form action="categorias/form" method="get">
-                    <input class="btn btn-success btn-xs" type="submit" value="Nova Categoria">
-                </form>
-
             </div>
 
         </div>
