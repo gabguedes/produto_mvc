@@ -25,6 +25,9 @@ public class ProdutoController {
     private ProdutoService service;
 
     @Autowired
+    private ProdutoRepository repository;
+
+    @Autowired
     private CategoriaService categoriaService;
 
     @ModelAttribute("categorias")
