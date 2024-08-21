@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://thymeleaf.org">
 <head>
-    <title>Editar Produto</title>
+    <title>Title</title>
 </head>
 <body>
 <h1>Editar</h1>
@@ -17,7 +17,7 @@
                     <span th:text="${mensagem}"></span>
                 </div>
 
-                <form action="#" th:action="@{/produtos/{id}(id=${produto.id})}" th:object="${produto}" method="post">
+                <form action="#" th:action="@{/produtos/{id}(id=${produtoDTO.id})}" th:object="${produtoDTO}" method="post">
                     <input type="hidden" name="_method" value="put">
                     <div class="row mb-3">
                         <label for="nome" class="col-sm-1 col-form-label">Nome:</label>
@@ -38,24 +38,45 @@
                             <span class="mensagem" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
                         </div>
                     </div>
-
+                    <!--adicionando e populando ComboBox Categoria-->
                     <div class="form-row">
                         <div class="row mb-3">
-                            <label for="categoria" class="col-sm-1 col-form-label">Categoria:</label>
+                            <label  class="col-sm-1 col-form-label">Categoria:</label>
                             <div class="col-sm-3">
-                                <select class="chosen-select form-control" data-placehold="categoria"
-                                        name="categoria" id="categoria" th:field="*{categoria}">
+                                <select th:field="*{categoria}" id="categoria" name="categoria"
+                                        class="chosen-select form-control"  data-placehold="categoria">
                                     <option th:each="categoria : ${categorias}"
-                                            th:text="${categoria.nome}"
-                                            th:value="${categoria.id}">
+                                            th:value="${categoria.id}"
+                                            th:text="${categoria.nome}">
                                     </option>
                                 </select>
                             </div>
                             <div class="col-sm-5">
-                                <span class="mensagem" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></span>
+								<span class="mensagem" th:errors="*{categoria}"
+                                      th:if="${#fields.hasErrors('categoria')}"></span>
                             </div>
                         </div>
                     </div>
+
+                    <!--adicionando e populando ComboBox Loja-->
+                    <div class="form-row">
+                        <div class="row mb-3">
+                            <label class="col-sm-1 col-form-label">Lojas:</label>
+                            <div class="col-sm-3">
+                                <select class="chosen-select form-control" data-placehold="lojas" id="lojas" multiple="true"
+                                        name="lojas" th:field="${produtoDTO.lojas}">
+                                    <option th:each="loja :${lojas}"
+                                            th:text="${loja.nome}"
+                                            th:value="${loja.id}"/>
+                                </select>
+                            </div>
+                            <div class="col-sm-5">
+								<span class="mensagem" th:errors="*{lojas}"
+                                      th:if="${#fields.hasErrors('lojas')}"></span>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="row mb-3">
                         <label for="valor" class="col-sm-1 col-form-label">Valor:</label>

@@ -55,7 +55,6 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -67,6 +66,7 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -83,16 +83,17 @@
 						</exclude>
 					</excludes>
 				</configuration>
+
 			</plugin>
 
 			<!-- Failed to execute goal org.apache.maven.plugins:maven-resources-plugin:3.2.0:resources
 			(default-resources) on project application-etude: Input length = 1 -->
 			<!-- Incluir -->
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-resources-plugin</artifactId>-->
-<!--				<version>3.1.0</version>-->
-<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
 
 
 		</plugins>
